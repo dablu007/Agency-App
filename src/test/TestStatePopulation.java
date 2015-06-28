@@ -40,13 +40,13 @@ public class TestStatePopulation {
         assertEquals(dummydata, statePopulation.getPopulation("maharashtra"));
     }
 
-//
-//    @Test
-//    public void testShouldReturnPopulationOfSpecifiedState() {
-//        data.put("maharashtra",1000);
-//        data.put("karnataka",1200);
-//        data.put("tamilnadu",900);
-//        statePopulation = new StatePopulation(data);
-//        assertEquals(1200, statePopulation.getPopulation("tamilnadu"));
-//    }
+
+    @Test
+    public void testShouldReturnPopulationOfSpecifiedState() {
+        data.put("maharashtra",1000);
+        data.put("karnataka",1200);
+        data.put("tamilnadu",900);
+        statePopulation = new StatePopulation(data);
+        assertEquals(data.get("tamilnadu"), statePopulation.getPopulation("tamilnadu"));
+    }
 }

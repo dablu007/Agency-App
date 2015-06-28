@@ -14,7 +14,7 @@ public class StatePopulation {
         populationData.putAll(data);
     }
 
-    public HashMap<String, Integer> getPopulation(String name) {
-        return this.populationData;
+    public Integer getPopulation(String name) {
+        return this.populationData.get(name);
     }
 }
