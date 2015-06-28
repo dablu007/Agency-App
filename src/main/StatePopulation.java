@@ -13,7 +13,9 @@ public class StatePopulation {
         statePopulation.putAll(data);
     }
 
-    public Integer getPopulation(String name) {
-        return this.statePopulation.get(name);
+    public int getPopulation(String name) {
+        if (statePopulation.containsKey(name))
+            return this.statePopulation.get(name);
+        return 0;
     }
 }

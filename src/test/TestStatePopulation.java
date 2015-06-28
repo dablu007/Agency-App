@@ -27,17 +27,16 @@ public class TestStatePopulation {
 
     }
     @Test
-    public void testShouldGetStatePopulationAsNull(){
+    public void testShouldGetStatePopulationAsZero(){
         statePopulation = new StatePopulation(data);
-        assertEquals(dummydata, statePopulation.getPopulation("tamilnadu"));
+        assertEquals(0, statePopulation.getPopulation("tamilnadu"));
     }
 
     @Test
     public void testShouldReturnStatePopulation() {
         data.put("maharashtra",1000);
         statePopulation = new StatePopulation(data);
-        dummydata.put("maharashtra", 1000);
-        assertEquals(dummydata, statePopulation.getPopulation("maharashtra"));
+        assertEquals(1000, statePopulation.getPopulation("maharashtra"));
     }
 
 
@@ -47,6 +46,15 @@ public class TestStatePopulation {
         data.put("karnataka",1200);
         data.put("tamilnadu",900);
         statePopulation = new StatePopulation(data);
-        assertEquals(data.get("tamilnadu"), statePopulation.getPopulation("tamilnadu"));
+        assertEquals(900, statePopulation.getPopulation("tamilnadu"));
+    }
+
+    @Test
+    public void testShouldReturnZeroWhenStateIsInvalid(){
+        data.put("maharashtra",1000);
+        data.put("karnataka",1200);
+        dummydata.put("invlaid",0);
+        statePopulation = new StatePopulation(data);
+        assertEquals(0, statePopulation.getPopulation("bihar"));
     }
 }
