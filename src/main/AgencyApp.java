@@ -12,8 +12,8 @@ public class AgencyApp {
     private static HashMap<String,Integer> statePopulationData;
     private static HashMap<String,Integer> districtPopulationData;
     public static void main(String args[]){
-        createStatePopulationData();
-        createDistrictPopulationData();
+        statePopulationData = CreatePopulationData.createStatePopulationData();
+        districtPopulationData = CreatePopulationData.createDistrictPopulationData();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StatePopulation statePopulation = new StatePopulation(statePopulationData);
         while(true) {
@@ -51,22 +51,6 @@ public class AgencyApp {
             e1.printStackTrace();
         }
     }
-    public  static void createDistrictPopulationData(){
-        districtPopulationData = new HashMap<>();
-        districtPopulationData.put("pune",1000);
-        districtPopulationData.put("patna",1000);
-        districtPopulationData.put("bangalore",1000);
-        districtPopulationData.put("chennai",1000);
-        districtPopulationData.put("bhubneshwar",1000);
-    }
 
-    private static void createStatePopulationData() {
-        statePopulationData = new HashMap<>();
-        statePopulationData.put("delhi",2000);
-        statePopulationData.put("maharashtra",1500);
-        statePopulationData.put("bihar",1200);
-        statePopulationData.put("tamilnadu",1300);
-        statePopulationData.put("gujrat", 2000);
-    }
 
 }
