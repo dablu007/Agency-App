@@ -3,6 +3,7 @@ package main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,9 +12,13 @@ import java.util.HashMap;
 public class AgencyApp {
     private static HashMap<String,Integer> statePopulationData;
     private static HashMap<String,Integer> districtPopulationData;
+    private static HashMap<String,ArrayList<String>> stateDisticts;
     public static void main(String args[]){
+        StateDistrict stateDistrict;
+
         statePopulationData = CreatePopulationData.createStatePopulationData();
         districtPopulationData = CreatePopulationData.createDistrictPopulationData();
+        stateDisticts = CreatePopulationData.createStateDistricts();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StatePopulation statePopulation = new StatePopulation(statePopulationData);
         while(true) {
@@ -25,7 +30,7 @@ public class AgencyApp {
                 System.out.println("Want To check " + stateName + "District Population Press Y");
                 String check = br.readLine();
                 if(check.equals("Y")){
-                    getDistrictPopulation();
+                    getDistrictPopulation(stateName);
                 }
                 System.out.println("Press N to exit the App or Y to continue");
                 String status = br.readLine();
@@ -38,14 +43,19 @@ public class AgencyApp {
         }
     }
 
-    private static void getDistrictPopulation() {
+    private static void getDistrictPopulation(String stateName) {
         DistrictPopulation districtPopulation = new DistrictPopulation(districtPopulationData);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
             System.out.println("Enter the District Name for getting Population");
-            String stateName = br.readLine();
-            int population = districtPopulation.getPopulation(stateName);
+            String districtName = br.readLine();
+            int population = 0;
+            if (!stateDisticts.get(stateName).contains(districtName)) {
+                System.out.println("Not a valid District For given state");
+                return;
+            }
+            population = districtPopulation.getPopulation(districtName);
             System.out.println(population);
         } catch (IOException e1) {
             e1.printStackTrace();
