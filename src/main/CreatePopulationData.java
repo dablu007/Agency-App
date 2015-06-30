@@ -9,7 +9,9 @@ import java.util.HashMap;
 public class CreatePopulationData {
     private static HashMap<String,Integer> districtPopulationData;
     private static HashMap<String,Integer> statePopulationData;
+    private static HashMap<String,Integer> cityPopulationData;
     private static HashMap<String, ArrayList<String>> stateDistricts;
+    private static HashMap<String, ArrayList<String>> districtCities;
     public static HashMap createDistrictPopulationData(){
         districtPopulationData = new HashMap<>();
         districtPopulationData.put("pune",1000);
@@ -28,7 +30,7 @@ public class CreatePopulationData {
         statePopulationData.put("gujrat", 2000);
         return statePopulationData;
     }
-
+    
     public static HashMap<String, ArrayList<String>> createStateDistricts() {
         stateDistricts = new HashMap<>();
         ArrayList<String> districts = new ArrayList<>();
@@ -36,5 +38,21 @@ public class CreatePopulationData {
         districts.add("purnia");
         stateDistricts.put("bihar",districts);
         return stateDistricts;
+    }
+
+    public static HashMap<String, ArrayList<String>> createDistrictCities() {
+        districtCities  = new HashMap<>();
+        ArrayList<String> cities = new ArrayList<>();
+        cities.add("patna");
+        cities.add("danapur");
+        districtCities.put("patna",cities);
+        return districtCities;
+    }
+
+    public static HashMap<String, Integer> createCityPopulationData() {
+        cityPopulationData = new HashMap<>();
+        cityPopulationData.put("patna",100);
+        cityPopulationData.put("danapur",120);
+        return cityPopulationData;
     }
 }

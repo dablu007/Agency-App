@@ -12,12 +12,17 @@ import java.util.HashMap;
 public class AgencyApp {
     private static HashMap<String,Integer> statePopulationData;
     private static HashMap<String,Integer> districtPopulationData;
+    private static HashMap<String, Integer> cityPopulationData;
     private static HashMap<String,ArrayList<String>> stateDisticts;
+    private static HashMap<String, ArrayList<String>> districtCities;
+
     public static void main(String args[]){
         StateDistrict stateDistrict;
         statePopulationData = CreatePopulationData.createStatePopulationData();
         districtPopulationData = CreatePopulationData.createDistrictPopulationData();
+        cityPopulationData = CreatePopulationData.createCityPopulationData();
         stateDisticts = CreatePopulationData.createStateDistricts();
+        districtCities = CreatePopulationData.createDistrictCities();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StatePopulation statePopulation = new StatePopulation(statePopulationData);
         while(true) {
@@ -26,7 +31,7 @@ public class AgencyApp {
                 String stateName = br.readLine();
                 int population = statePopulation.getPopulation(stateName);
                 System.out.println(population);
-                System.out.println("Want To check " + stateName.toUpperCase() + " District Population Press Y");
+                System.out.println("Want To check " + stateName.toUpperCase() + " Districts Population Press Y");
                 String check = br.readLine();
                 if(check.equals("Y")){
                     getDistrictPopulation(stateName);
@@ -54,15 +59,43 @@ public class AgencyApp {
                 System.out.println(district.toUpperCase());
             System.out.println("Enter the District Name for getting Population");
             String districtName = br.readLine();
-            if (!stateDisticts.get(stateName).contains(districtName)) {
+            if (!districts.contains(districtName)) {
                 System.out.println("Not a valid District For given state");
                 return;
             }
             population = districtPopulation.getPopulation(districtName);
             System.out.println(population);
+            System.out.println("Want To check " + districtName.toUpperCase() + " Cities Population Press Y");
+            String check = br.readLine();
+            if(check.equals("Y")){
+                getCityPopulation(districtName);
+            }
         }
         catch (IOException e1) {
             e1.printStackTrace();
+        }
+    }
+
+    private static void getCityPopulation(String districtName) {
+        CityPopulation cityPopulation = new CityPopulation(cityPopulationData);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String> cities = districtCities.get(districtName);
+        try {
+            System.out.println("Cities in " + districtName.toUpperCase() + " District");
+            for(String city:cities )
+                System.out.println(city.toUpperCase());
+            System.out.println("Enter the City Name ");
+            String cityName = br.readLine();
+            if (!cities.contains(cityName)){
+                System.out.println("Not a valid City For given District");
+                return;
+            }
+            int population = cityPopulation.getCityPopulation(cityName);
+            System.out.println(population);
+            return;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
