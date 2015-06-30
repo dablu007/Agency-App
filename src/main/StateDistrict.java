@@ -13,7 +13,7 @@ public class StateDistrict {
         stateDistrictData.putAll(data);
     }
 
-    public ArrayList<String> getDistrictForState(String name) {
+    public ArrayList<String> getDistrictsForState(String name) {
         if (stateDistrictData.containsKey(name))
             return stateDistrictData.get(name);
         return new ArrayList<>();

@@ -28,10 +28,10 @@ public class TestStateDistrict {
         anotherDistricts.add("samastipur");
     }
     @Test
-    public void testShouldReturnDistrict(){
+    public void testShouldReturnDistrictNull(){
         stateDistrictData.put("maharashtra", new ArrayList<String>());
         stateDistrict = new StateDistrict(stateDistrictData);
-        assertEquals(null,stateDistrict.getDistrictForState("maharashtra"));
+        assertEquals(null,stateDistrict.getDistrictsForState("maharashtra"));
 
     }
 
@@ -40,13 +40,13 @@ public class TestStateDistrict {
         stateDistrictData.put("maharashtra",districts);
         stateDistrictData.put("bihar",anotherDistricts);
         stateDistrict = new StateDistrict(stateDistrictData);
-        assertEquals(anotherDistricts, stateDistrict.getDistrictForState("bihar"));
+        assertEquals(anotherDistricts, stateDistrict.getDistrictsForState("bihar"));
     }
 
     @Test
     public void testShouldNotReturnNullWhenStateNotPresent() {
         stateDistrictData.put("maharashtra",districts);
         stateDistrict = new StateDistrict(stateDistrictData);
-        assertEquals(new ArrayList<String>(), stateDistrict.getDistrictForState("karnataka"));
+        assertEquals(new ArrayList<String>(), stateDistrict.getDistrictsForState("karnataka"));
     }
 }
